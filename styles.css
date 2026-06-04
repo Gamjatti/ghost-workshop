@@ -603,3 +603,54 @@ body::before {
   filter: blur(36px); opacity: 0.92;
   background: radial-gradient(circle, rgba(255,140,90,0.55), rgba(91,143,208,0.30) 42%, transparent 70%);
 }
+/* ============================================================
+   INTERACTIVE HERO DEMO — drag to "finish" a region
+   ============================================================ */
+.demo {
+  background: rgba(255,255,255,0.03); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.10); border-radius: 18px; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(2,8,18,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.demo__bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.demo__bar i { width: 10px; height: 10px; border-radius: 50%; background: #2c3a4d; }
+.demo__bar em { margin-left: 8px; font-family: var(--mono); font-size: 11px; font-style: normal; letter-spacing: .06em; color: var(--faint); }
+.demo__stage { position: relative; height: 320px; overflow: hidden; cursor: grab; touch-action: none; }
+.demo__stage:active { cursor: grabbing; }
+.demo__art { position: absolute; inset: 0; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.m-row { display: flex; align-items: center; gap: 10px; }
+.m-dot { width: 22px; height: 22px; border-radius: 7px; }
+.m-line { height: 11px; border-radius: 6px; flex: 1; }
+.m-line.w35 { flex: none; width: 35%; }
+.m-hero { height: 104px; border-radius: 13px; }
+.m-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 11px; flex: 1; }
+.m-cards span { border-radius: 10px; }
+.m-btn { align-self: flex-start; padding: 9px 18px; border-radius: 9px; font-size: 12px; }
+
+/* the "80-point AI draft": blurry, muddy, grey */
+.demo__art--blur { filter: blur(3px) saturate(0.4) brightness(0.85); }
+.demo__art--blur .m-dot, .demo__art--blur .m-line, .demo__art--blur .m-cards span { background: #38424f; }
+.demo__art--blur .m-hero { background: linear-gradient(120deg,#3a4654,#2f3a47); }
+.demo__art--blur .m-btn { background: #38424f; color: #828e9d; }
+
+/* the "finished" version: crisp, branded */
+.demo__art--sharp .m-dot { background: var(--steel); }
+.demo__art--sharp .m-line { background: #d2dcea; }
+.demo__art--sharp .m-hero { background: var(--grad); box-shadow: 0 10px 30px rgba(218,106,74,0.3); }
+.demo__art--sharp .m-cards span { background: #15263d; border: 1px solid rgba(255,255,255,0.1); }
+.demo__art--sharp .m-btn { background: var(--mint); color: #241008; font-weight: 700; box-shadow: 0 6px 18px rgba(218,106,74,0.4); }
+
+/* selection box */
+.demo__sel {
+  position: absolute; border: 1.5px solid var(--mint); border-radius: 11px; pointer-events: none;
+  box-shadow: 0 0 0 1px rgba(218,106,74,0.25), 0 0 26px rgba(218,106,74,0.4);
+}
+.demo__sel::before, .demo__sel::after,
+.demo__sel > .demo__tag { }
+.demo__sel::before { content: ""; position: absolute; left: -4px; top: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px var(--mint); }
+.demo__sel::after { content: ""; position: absolute; right: -4px; bottom: -4px; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px var(--mint); }
+.demo__tag {
+  position: absolute; top: -27px; left: -1px; background: var(--mint); color: #241008;
+  font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px; white-space: nowrap;
+}
+.demo__hint { padding: 13px 16px; font-size: 13px; color: var(--sub); border-top: 1px solid var(--line); text-align: center; }
+.demo__hint b { color: var(--mint); }

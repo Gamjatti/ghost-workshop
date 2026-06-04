@@ -229,3 +229,57 @@ if (form && formMsg && submitBtn) {
     btn.addEventListener("pointerleave", function () { btn.style.transform = ""; });
   });
 })();
+/* ============================================================
+   Interactive hero demo — drag a box to "finish" that region
+   ============================================================ */
+(function () {
+  var stage = document.getElementById("demoStage");
+  if (!stage) return;
+  var sharp = document.getElementById("demoSharp");
+  var sel = document.getElementById("demoSel");
+  var BW = 0.46, BH = 0.44;          // box size as fraction of stage
+  var cx = 0.5, cy = 0.5;            // box center as fraction
+  var auto = true;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function render() {
+    var W = stage.clientWidth, H = stage.clientHeight;
+    var w = W * BW, h = H * BH;
+    var x = Math.max(0, Math.min(W - w, cx * W - w / 2));
+    var y = Math.max(0, Math.min(H - h, cy * H - h / 2));
+    sel.style.left = x + "px"; sel.style.top = y + "px";
+    sel.style.width = w + "px"; sel.style.height = h + "px";
+    sharp.style.clipPath = "inset(" + y + "px " + (W - x - w) + "px " + (H - y - h) + "px " + x + "px round 11px)";
+  }
+  function moveTo(e) {
+    var r = stage.getBoundingClientRect();
+    cx = (e.clientX - r.left) / r.width;
+    cy = (e.clientY - r.top) / r.height;
+    render();
+  }
+
+  var down = false;
+  stage.addEventListener("pointerdown", function (e) {
+    auto = false; down = true;
+    try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+    moveTo(e);
+  });
+  stage.addEventListener("pointermove", function (e) { if (down) moveTo(e); });
+  stage.addEventListener("pointerup", function () { down = false; });
+  window.addEventListener("resize", render);
+
+  // idle auto-sweep to signal interactivity until the user grabs it
+  var t = 0;
+  function tick() {
+    if (!auto) return;
+    if (!reduce) {
+      t += 0.014;
+      cx = 0.5 + Math.sin(t) * 0.27;
+      cy = 0.5 + Math.cos(t * 0.8) * 0.17;
+      render();
+    }
+    requestAnimationFrame(tick);
+  }
+  render();
+  tick();
+})();
