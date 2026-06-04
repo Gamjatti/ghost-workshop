@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 랜딩페이지의 마지막 20% 고치기 | 유령제작소</title>
+  <meta name="description" content="AI가 만든 랜딩페이지를 Before / After로 분석하고, 실무 수준으로 끌어올리는 수정 포인트를 정리합니다." />
+  <meta property="og:title" content="AI 랜딩페이지의 마지막 20% 고치기" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <span id="topSentinel" aria-hidden="true"></span>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner wrap">
+      <a class="brand" href="index.html" aria-label="유령제작소 홈">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">유령제작소<span class="brand__en">GHOST&nbsp;WORKSHOP</span></span>
+      </a>
+      <nav class="nav__links" aria-label="주요 메뉴">
+        <a href="index.html">Home</a><a href="blog.html" aria-current="page">Blog</a><a href="about.html">About</a>
+      </nav>
+      <a href="beta.html" class="btn btn--accent btn--sm nav__cta">베타 신청</a>
+      <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article__head">
+        <span class="tag tag--fix">Fix Lab</span>
+        <h1 class="article__title">AI 랜딩페이지의 마지막 20% 고치기</h1>
+        <p class="article__meta">2026.06.02 · 7분 읽기</p>
+        <p class="article__lead">AI에게 “SaaS 랜딩페이지 만들어줘”라고 하면 1분 만에 한 화면이 나옵니다. 그럴듯하지만 그대로 쓰기는 어렵습니다. 무엇을 고치면 실무 수준에 가까워질까요?</p>
+      </header>
+
+      <div class="prose">
+        <h2>Before. AI가 만든 원본</h2>
+        <p>아래는 AI가 만든 전형적인 히어로입니다. 구조는 맞지만 시선이 어디에도 붙지 않습니다.</p>
+        <div class="ba">
+          <div class="ba__col ba__col--before">
+            <div class="ba__cap">BEFORE · AI 원본</div>
+            <div class="ba__shot ba__shot--before" aria-hidden="true">
+              <div class="l w70"></div><div class="l w90"></div><div class="l w40"></div>
+              <span class="ba__btn">자세히 보기</span>
+            </div>
+          </div>
+          <div class="ba__col ba__col--after">
+            <div class="ba__cap">AFTER · 수정본</div>
+            <div class="ba__shot ba__shot--after" aria-hidden="true">
+              <div class="l w40"></div><div class="l w70"></div>
+              <span class="ba__btn">베타 신청</span>
+            </div>
+          </div>
+        </div>
+
+        <h2>Problem. 무엇이 어색한가</h2>
+        <ul class="bullets">
+          <li><strong>위계가 없다.</strong> 헤드라인, 서브, 버튼이 비슷한 크기와 무게로 나열되어 시선의 순서가 생기지 않습니다.</li>
+          <li><strong>여백이 균일하다.</strong> 모든 간격이 똑같아서 “정돈됨”이 아니라 “기계적임”으로 읽힙니다.</li>
+          <li><strong>CTA가 약하다.</strong> “자세히 보기”는 행동을 요구하지 않습니다. 대비도 낮아 버튼이 배경에 묻힙니다.</li>
+        </ul>
+
+        <h2>Fix. 어떻게 고치는가</h2>
+        <p>세 가지를 조정합니다. 생성을 다시 돌리는 게 아니라, 이 세 지점만 수정합니다.</p>
+        <ul class="bullets">
+          <li>헤드라인을 한 단계 키우고 자간을 좁혀 무게 중심을 위로 옮깁니다.</li>
+          <li>헤드라인과 본문 사이 여백만 늘려 “읽는 순서”를 만듭니다.</li>
+          <li>CTA 카피를 행동형(“베타 신청”)으로 바꾸고, 단일 강조색으로 대비를 확보합니다.</li>
+        </ul>
+
+        <h2>After. 무엇이 달라졌나</h2>
+        <p>같은 콘텐츠인데 시선이 헤드라인 → 본문 → 버튼으로 흐릅니다. 바뀐 건 20%, 결정된 건 인상 전체입니다.</p>
+
+        <div class="callout">
+          <div class="callout__k">TAKEAWAY · 실무 체크포인트</div>
+          <ul class="bullets">
+            <li>전체를 다시 만들지 말고, 위계·여백·CTA 세 곳만 본다.</li>
+            <li>“정돈”은 균일함이 아니라 의도된 차이에서 온다.</li>
+            <li>버튼 카피는 명사가 아니라 동사로 쓴다.</li>
+          </ul>
+        </div>
+
+        <p>이 수정 과정에서 가장 답답한 순간은 “여기 버튼만 바꾸고 싶은데 AI가 전체를 다시 만드는” 지점입니다. 유령제작소는 바로 이 구간을 다룹니다.</p>
+      </div>
+
+      <div class="article-cta">
+        <div class="ctaband">
+          <h2 class="ctaband__title">마지막 수정이 답답했다면</h2>
+          <p class="ctaband__body">AI 결과물의 마지막 20%를 함께 실험할 초기 사용자를 찾습니다.</p>
+          <div class="ctaband__cta"><a href="beta.html" class="btn btn--accent">베타 신청하기</a></div>
+          <p class="ctaband__note">현재 정식 출시 전 초기 테스트 준비 단계입니다.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="related">
+      <div class="related__h">관련 글</div>
+      <div class="grid-3">
+        <a class="pcard" href="post-why-ai-design-stops-at-80.html">
+          <span class="tag tag--20">마지막 20%</span>
+          <h3 class="pcard__title">AI 디자인은 왜 80점에서 멈출까?</h3>
+          <p class="pcard__meta">2026.06.04 · 5분 읽기</p>
+        </a>
+        <a class="pcard" href="post-click-is-coordinate.html">
+          <span class="tag tag--note">Worknote</span>
+          <h3 class="pcard__title">클릭은 명령이 아니라 좌표다</h3>
+          <p class="pcard__meta">2026.05.30 · 6분 읽기</p>
+        </a>
+        <a class="pcard" href="blog.html">
+          <span class="tag">전체</span>
+          <h3 class="pcard__title">Blog 전체 보기</h3>
+          <p class="pcard__meta">모든 글 →</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div><strong>유령제작소</strong><p>AI 디자인의 마지막 20%를 기록하고, 그 문제를 함께 실험할 초기 사용자를 모집합니다.</p></div>
+      </div>
+      <nav class="footer__nav" aria-label="푸터 메뉴">
+        <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="beta.html">베타 신청</a>
+      </nav>
+      <div class="footer__legal">© 2026 유령제작소 (Ghost Workshop). AI는 초안을 만들고, 마지막 20%는 사람이 결정합니다.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

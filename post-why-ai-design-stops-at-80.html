@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 디자인은 왜 80점에서 멈출까? | 유령제작소</title>
+  <meta name="description" content="AI는 초안을 빠르게 만들지만, 실무 결과물은 마지막 수정에서 결정됩니다. 80점에서 멈추는 구조적 이유를 짚습니다." />
+  <meta property="og:title" content="AI 디자인은 왜 80점에서 멈출까?" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <span id="topSentinel" aria-hidden="true"></span>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner wrap">
+      <a class="brand" href="index.html" aria-label="유령제작소 홈">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">유령제작소<span class="brand__en">GHOST&nbsp;WORKSHOP</span></span>
+      </a>
+      <nav class="nav__links" aria-label="주요 메뉴">
+        <a href="index.html">Home</a><a href="blog.html" aria-current="page">Blog</a><a href="about.html">About</a>
+      </nav>
+      <a href="beta.html" class="btn btn--accent btn--sm nav__cta">베타 신청</a>
+      <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article__head">
+        <span class="tag tag--20">마지막 20%</span>
+        <h1 class="article__title">AI 디자인은 왜 80점에서 멈출까?</h1>
+        <p class="article__meta">2026.06.04 · 5분 읽기</p>
+        <p class="article__lead">AI가 만든 결과물은 처음엔 좋아 보입니다. 그런데 막상 쓰려고 하면 어딘가 어색합니다. 이 “80점의 벽”은 AI 성능이 부족해서가 아닙니다. 다른 이유가 있습니다.</p>
+      </header>
+
+      <div class="prose">
+        <h2>문제 장면</h2>
+        <p>발표가 내일입니다. AI로 표지를 만들었습니다. 5초 만에 그럴듯한 결과가 나옵니다. 그런데 “이 제목만 조금 더 크게, 색은 유지하고”를 시키는 순간부터 시간이 녹기 시작합니다. 고치려 할수록 다른 곳이 무너집니다.</p>
+        <blockquote>초안은 1분, 마지막 수정은 1시간. 많은 사람이 같은 경험을 합니다.</blockquote>
+
+        <h2>왜 이런 문제가 생기는가</h2>
+        <p>생성형 AI는 “평균적으로 그럴듯한” 결과를 잘 만듭니다. 학습된 분포의 중심을 향하기 때문입니다. 문제는 실무 품질이 분포의 중심이 아니라 <strong>가장자리의 디테일</strong>에서 결정된다는 점입니다.</p>
+        <ul class="bullets">
+          <li>평균적인 답은 빠르게 80점에 도달합니다.</li>
+          <li>하지만 90점, 95점은 맥락, 일관성, 브랜드 톤 같은 “이 경우에만 맞는” 판단에서 나옵니다.</li>
+          <li>이 판단은 언어로 다 설명되지 않기 때문에, 프롬프트로 밀어넣기 어렵습니다.</li>
+        </ul>
+
+        <h2>실무에서는 왜 중요한가</h2>
+        <p>80점짜리는 “초안”으로는 충분하지만 “결과물”로는 부족합니다. 실무에서 쓰는 건 결과물이고, 결과물의 인상은 마지막 20%가 결정합니다. 그래서 시간이 가장 많이 드는 구간도, 만족도가 갈리는 구간도 바로 그 20%입니다.</p>
+
+        <h2>유령제작소는 이 문제를 어떻게 보는가</h2>
+        <p>우리는 더 강한 생성 모델이 이 문제를 끝낸다고 보지 않습니다. 필요한 건 더 좋은 생성이 아니라, <strong>사람의 의도를 부분 단위로 전달하는 방법</strong>입니다. 전체를 다시 만들지 않고 “여기만” 고칠 수 있을 때, 80점과 95점 사이가 비로소 메워집니다.</p>
+      </div>
+
+      <div class="article-cta">
+        <div class="ctaband">
+          <h2 class="ctaband__title">80점에서 멈춰본 적 있다면</h2>
+          <p class="ctaband__body">마지막 20%를 함께 실험할 초기 사용자를 찾습니다.</p>
+          <div class="ctaband__cta"><a href="beta.html" class="btn btn--accent">베타 신청하기</a></div>
+          <p class="ctaband__note">현재 정식 출시 전 초기 테스트 준비 단계입니다.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="related">
+      <div class="related__h">관련 글</div>
+      <div class="grid-3">
+        <a class="pcard" href="post-fix-ai-landing-page.html">
+          <span class="tag tag--fix">Fix Lab</span>
+          <h3 class="pcard__title">AI 랜딩페이지의 마지막 20% 고치기</h3>
+          <p class="pcard__meta">2026.06.02 · 7분 읽기</p>
+        </a>
+        <a class="pcard" href="post-click-is-coordinate.html">
+          <span class="tag tag--note">Worknote</span>
+          <h3 class="pcard__title">클릭은 명령이 아니라 좌표다</h3>
+          <p class="pcard__meta">2026.05.30 · 6분 읽기</p>
+        </a>
+        <a class="pcard" href="blog.html">
+          <span class="tag">전체</span>
+          <h3 class="pcard__title">Blog 전체 보기</h3>
+          <p class="pcard__meta">모든 글 →</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div><strong>유령제작소</strong><p>AI 디자인의 마지막 20%를 기록하고, 그 문제를 함께 실험할 초기 사용자를 모집합니다.</p></div>
+      </div>
+      <nav class="footer__nav" aria-label="푸터 메뉴">
+        <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="beta.html">베타 신청</a>
+      </nav>
+      <div class="footer__legal">© 2026 유령제작소 (Ghost Workshop). AI는 초안을 만들고, 마지막 20%는 사람이 결정합니다.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

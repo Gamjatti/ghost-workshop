@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | 유령제작소</title>
+  <meta name="description" content="AI 디자인의 마지막 20%를 기록합니다. 마지막 20% / Fix Lab / Worknote." />
+  <meta property="og:title" content="Blog | 유령제작소" />
+  <meta property="og:description" content="AI 디자인의 마지막 20%를 기록합니다." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <span id="topSentinel" aria-hidden="true"></span>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner wrap">
+      <a class="brand" href="index.html" aria-label="유령제작소 홈">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">유령제작소<span class="brand__en">GHOST&nbsp;WORKSHOP</span></span>
+      </a>
+      <nav class="nav__links" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="blog.html" aria-current="page">Blog</a>
+        <a href="about.html">About</a>
+      </nav>
+      <a href="beta.html" class="btn btn--accent btn--sm nav__cta">베타 신청</a>
+      <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="phero wrap">
+      <h1 class="phero__title">Blog</h1>
+      <p class="phero__sub">AI 디자인의 마지막 20%를 기록합니다. 생성 이후의 수정, 판단, 의도 전달에 관한 글을 쌓습니다.</p>
+    </section>
+
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="카테고리 필터">
+        <button class="tab is-active" data-category="all" role="tab" aria-selected="true" type="button">전체</button>
+        <button class="tab" data-category="last-20" role="tab" aria-selected="false" type="button">마지막 20%</button>
+        <button class="tab" data-category="fix-lab" role="tab" aria-selected="false" type="button">Fix Lab</button>
+        <button class="tab" data-category="worknote" role="tab" aria-selected="false" type="button">Worknote</button>
+      </div>
+
+      <div class="bloglist" id="blogList">
+        <a class="pcard" data-category="last-20" href="post-why-ai-design-stops-at-80.html">
+          <span class="tag tag--20">마지막 20%</span>
+          <h2 class="pcard__title">AI 디자인은 왜 80점에서 멈출까?</h2>
+          <p class="pcard__sum">AI는 초안을 빠르게 만들지만, 실무 결과물은 마지막 수정에서 결정됩니다. 80점에서 멈추는 구조적 이유를 짚습니다.</p>
+          <p class="pcard__meta">2026.06.04 · 5분 읽기</p>
+        </a>
+        <a class="pcard" data-category="fix-lab" href="post-fix-ai-landing-page.html">
+          <span class="tag tag--fix">Fix Lab</span>
+          <h2 class="pcard__title">AI 랜딩페이지의 마지막 20% 고치기</h2>
+          <p class="pcard__sum">AI가 만든 랜딩을 Before / After로 분석하고, 실무 수준으로 끌어올리는 수정 포인트를 정리합니다.</p>
+          <p class="pcard__meta">2026.06.02 · 7분 읽기</p>
+        </a>
+        <a class="pcard" data-category="worknote" href="post-click-is-coordinate.html">
+          <span class="tag tag--note">Worknote</span>
+          <h2 class="pcard__title">클릭은 명령이 아니라 좌표다</h2>
+          <p class="pcard__sum">자연어만으로는 “여기”를 전달할 수 없습니다. 클릭과 좌표가 의도 데이터가 되는 순간을 기록합니다.</p>
+          <p class="pcard__meta">2026.05.30 · 6분 읽기</p>
+        </a>
+        <a class="pcard" data-category="last-20" href="post-why-ai-design-stops-at-80.html">
+          <span class="tag tag--20">마지막 20%</span>
+          <h2 class="pcard__title">“여기만 바꿔줘”가 왜 어려울까</h2>
+          <p class="pcard__sum">사람은 화면을 보며 “여기”를 가리키지만, AI는 그 “여기”가 어디인지 모릅니다. 지시 대명사의 한계를 풀어봅니다.</p>
+          <p class="pcard__meta">2026.05.27 · 4분 읽기</p>
+        </a>
+        <a class="pcard" data-category="fix-lab" href="post-fix-ai-landing-page.html">
+          <span class="tag tag--fix">Fix Lab</span>
+          <h2 class="pcard__title">CTA 버튼의 마지막 20% 고치기</h2>
+          <p class="pcard__sum">대비, 여백, 카피 길이. AI가 만든 버튼이 어색해 보이는 세 가지 지점을 Before / After로 봅니다.</p>
+          <p class="pcard__meta">2026.05.24 · 5분 읽기</p>
+        </a>
+        <a class="pcard" data-category="worknote" href="post-click-is-coordinate.html">
+          <span class="tag tag--note">Worknote</span>
+          <h2 class="pcard__title">자연어는 충분한 인터페이스인가?</h2>
+          <p class="pcard__sum">프롬프트는 강력하지만 모든 의도를 담지는 못합니다. 입력의 마찰을 읽어야 하는 이유를 정리합니다.</p>
+          <p class="pcard__meta">2026.05.20 · 6분 읽기</p>
+        </a>
+      </div>
+      <p class="blogempty" id="blogEmpty">아직 이 카테고리에 글이 없습니다. 곧 채워집니다.</p>
+    </div>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="ctaband">
+          <h2 class="ctaband__title">읽다 보니 당신의 문제였다면</h2>
+          <p class="ctaband__body">AI 결과물의 마지막 수정이 답답했던 경험이 있다면, 유령제작소의 초기 테스트에 참여해주세요.</p>
+          <div class="ctaband__cta"><a href="beta.html" class="btn btn--accent">베타 신청하기</a></div>
+          <p class="ctaband__note">현재 정식 출시 전 초기 테스트 준비 단계입니다.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div><strong>유령제작소</strong><p>AI 디자인의 마지막 20%를 기록하고, 그 문제를 함께 실험할 초기 사용자를 모집합니다.</p></div>
+      </div>
+      <nav class="footer__nav" aria-label="푸터 메뉴">
+        <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="beta.html">베타 신청</a>
+      </nav>
+      <div class="footer__legal">© 2026 유령제작소 (Ghost Workshop). AI는 초안을 만들고, 마지막 20%는 사람이 결정합니다.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

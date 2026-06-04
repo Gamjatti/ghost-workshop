@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>클릭은 명령이 아니라 좌표다 | 유령제작소</title>
+  <meta name="description" content="자연어만으로는 '여기'를 전달할 수 없습니다. 클릭과 좌표가 의도 데이터가 되는 순간을 기록합니다." />
+  <meta property="og:title" content="클릭은 명령이 아니라 좌표다" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <span id="topSentinel" aria-hidden="true"></span>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner wrap">
+      <a class="brand" href="index.html" aria-label="유령제작소 홈">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">유령제작소<span class="brand__en">GHOST&nbsp;WORKSHOP</span></span>
+      </a>
+      <nav class="nav__links" aria-label="주요 메뉴">
+        <a href="index.html">Home</a><a href="blog.html" aria-current="page">Blog</a><a href="about.html">About</a>
+      </nav>
+      <a href="beta.html" class="btn btn--accent btn--sm nav__cta">베타 신청</a>
+      <button class="nav__toggle" id="navToggle" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="article__head">
+        <span class="tag tag--note">Worknote</span>
+        <h1 class="article__title">클릭은 명령이 아니라 좌표다</h1>
+        <p class="article__meta">2026.05.30 · 6분 읽기</p>
+        <p class="article__lead">우리는 클릭을 “버튼을 누르는 명령”으로만 생각합니다. 하지만 클릭에는 위치가 있습니다. 그 위치는 사용자가 말로 못 한 의도를 담고 있습니다.</p>
+      </header>
+
+      <div class="prose">
+        <h2>대표의 문제의식</h2>
+        <p>사람은 화면을 보며 “여기”라고 말합니다. 손가락이 가리키는 그 “여기”에는 좌표가 있습니다. 그런데 자연어 인터페이스는 이 좌표를 버립니다. “여기”라는 단어만 AI에게 전달되고, 정작 위치는 사라집니다.</p>
+        <blockquote>출력의 마찰은 줄이고, 입력의 마찰은 읽어야 합니다.</blockquote>
+
+        <h2>핵심 개념: 클릭 = 좌표 + 맥락</h2>
+        <p>클릭 한 번에는 생각보다 많은 정보가 들어 있습니다.</p>
+        <ul class="bullets">
+          <li><strong>좌표</strong> 화면의 어느 지점인가</li>
+          <li><strong>대상</strong> 그 지점에 있는 요소는 무엇인가</li>
+          <li><strong>맥락</strong> 직전에 무엇을 하다가 눌렀는가</li>
+        </ul>
+        <p>명령형 인터페이스는 이 중 “대상”만 취합니다. 나머지 좌표와 맥락은 버려집니다.</p>
+
+        <h2>쉬운 비유</h2>
+        <p>지도를 보며 길을 묻는 상황을 떠올려봅니다. 손으로 한 지점을 짚으면 한 마디면 됩니다. 하지만 전화로 같은 걸 설명하려면 문장이 길어지고, 그래도 오해가 생깁니다. 프롬프트만 쓰는 건 전화로 길을 설명하는 것과 같습니다.</p>
+
+        <h2>실무 사례</h2>
+        <p>“이 카드만 위로 올려줘.” 사람끼리는 통하는 이 말이 AI에게는 모호합니다. 어느 카드인지, 얼마나 올릴지, 나머지는 유지할지가 좌표 없이는 정해지지 않기 때문입니다. 클릭이 좌표로 전달되는 순간, 이 모호함의 절반이 사라집니다.</p>
+
+        <h2>유령제작소의 관점</h2>
+        <p>우리는 신뢰 가능한 AI가 완벽한 AI가 아니라 <strong>통제 가능한 AI</strong>라고 봅니다. 통제는 의도를 정확히 전달할 수 있을 때 가능합니다. 그리고 의도의 상당 부분은 언어가 아니라 행동, 즉 클릭과 좌표에 담겨 있습니다.</p>
+      </div>
+
+      <div class="article-cta">
+        <div class="ctaband">
+          <h2 class="ctaband__title">“여기”가 안 통해 답답했다면</h2>
+          <p class="ctaband__body">의도를 더 정확히 전달하는 방법을 함께 실험할 초기 사용자를 찾습니다.</p>
+          <div class="ctaband__cta"><a href="beta.html" class="btn btn--accent">베타 신청하기</a></div>
+          <p class="ctaband__note">현재 정식 출시 전 초기 테스트 준비 단계입니다.</p>
+        </div>
+      </div>
+    </article>
+
+    <section class="related">
+      <div class="related__h">관련 글</div>
+      <div class="grid-3">
+        <a class="pcard" href="post-why-ai-design-stops-at-80.html">
+          <span class="tag tag--20">마지막 20%</span>
+          <h3 class="pcard__title">AI 디자인은 왜 80점에서 멈출까?</h3>
+          <p class="pcard__meta">2026.06.04 · 5분 읽기</p>
+        </a>
+        <a class="pcard" href="post-fix-ai-landing-page.html">
+          <span class="tag tag--fix">Fix Lab</span>
+          <h3 class="pcard__title">AI 랜딩페이지의 마지막 20% 고치기</h3>
+          <p class="pcard__meta">2026.06.02 · 7분 읽기</p>
+        </a>
+        <a class="pcard" href="blog.html">
+          <span class="tag">전체</span>
+          <h3 class="pcard__title">Blog 전체 보기</h3>
+          <p class="pcard__meta">모든 글 →</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <div><strong>유령제작소</strong><p>AI 디자인의 마지막 20%를 기록하고, 그 문제를 함께 실험할 초기 사용자를 모집합니다.</p></div>
+      </div>
+      <nav class="footer__nav" aria-label="푸터 메뉴">
+        <a href="index.html">Home</a><a href="blog.html">Blog</a><a href="about.html">About</a><a href="beta.html">베타 신청</a>
+      </nav>
+      <div class="footer__legal">© 2026 유령제작소 (Ghost Workshop). AI는 초안을 만들고, 마지막 20%는 사람이 결정합니다.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
