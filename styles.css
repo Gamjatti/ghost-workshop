@@ -654,3 +654,23 @@ body::before {
 }
 .demo__hint { padding: 13px 16px; font-size: 13px; color: var(--sub); border-top: 1px solid var(--line); text-align: center; }
 .demo__hint b { color: var(--mint); }
+/* ============================================================
+   HERO 3D ORB (Home) + CSS fallback
+   ============================================================ */
+.orb3d { position: relative; aspect-ratio: 1; width: 100%; max-width: 520px; margin: 0 auto; }
+.orb3d::before {
+  content: ""; position: absolute; inset: 8%; border-radius: 50%; z-index: -1; filter: blur(46px);
+  background: radial-gradient(circle at 42% 40%, rgba(218,106,74,0.42), rgba(91,143,208,0.26) 50%, transparent 72%);
+  animation: orbPulse 6s var(--ease) infinite;
+}
+@keyframes orbPulse { 0%,100% { transform: scale(1); opacity: .85; } 50% { transform: scale(1.08); opacity: 1; } }
+.orb3d canvas { width: 100% !important; height: 100% !important; display: block; }
+/* CSS fallback sphere (shown only if WebGL fails) */
+.orb3d__ball {
+  position: absolute; inset: 16%; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #ffd9c2 0%, #ff9a6a 18%, #DA6A4A 44%, #5B8FD0 86%, #2a3c66 100%);
+  box-shadow: 0 30px 90px rgba(218,106,74,0.4), inset -18px -18px 50px rgba(20,30,55,0.6), inset 16px 16px 44px rgba(255,225,200,0.4);
+  animation: floaty 8s var(--ease) infinite;
+}
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+@media (prefers-reduced-motion: reduce) { .orb3d::before, .orb3d__ball { animation: none; } }
