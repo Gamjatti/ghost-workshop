@@ -597,3 +597,9 @@ body::before {
 }
 @media (prefers-reduced-motion: reduce) { .cursor-glow { display: none; } }
 @media (pointer: coarse) { .cursor-glow { display: none; } }
+/* ===== cursor glow — brighter & tighter so it clearly follows ===== */
+.cursor-glow {
+  width: 380px; height: 380px; margin: -190px 0 0 -190px;
+  filter: blur(36px); opacity: 0.92;
+  background: radial-gradient(circle, rgba(255,140,90,0.55), rgba(91,143,208,0.30) 42%, transparent 70%);
+}
