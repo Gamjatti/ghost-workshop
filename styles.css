@@ -583,3 +583,17 @@ body::before {
 .cat::before { height: 3px; }
 /* eyebrow text gradient for extra pop */
 .eyebrow { color: #cfe0f4; }
+/* ===== INTERACTIVE (cursor glow + card spotlight) ===== */
+.cursor-glow {
+  position: fixed; top: 0; left: 0; width: 540px; height: 540px; margin: -270px 0 0 -270px;
+  border-radius: 50%; pointer-events: none; z-index: -1; filter: blur(54px); opacity: 0.6; will-change: transform;
+  background: radial-gradient(circle, rgba(218,106,74,0.32), rgba(91,143,208,0.18) 46%, transparent 72%);
+}
+.pcard, .cat {
+  --mx: 50%; --my: 50%; --spot: 0;
+  background:
+    radial-gradient(260px circle at var(--mx) var(--my), rgba(218,106,74, var(--spot)), transparent 60%),
+    rgba(255,255,255,0.03);
+}
+@media (prefers-reduced-motion: reduce) { .cursor-glow { display: none; } }
+@media (pointer: coarse) { .cursor-glow { display: none; } }

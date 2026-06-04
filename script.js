@@ -179,3 +179,53 @@ if (form && formMsg && submitBtn) {
     }
   });
 }
+
+/* ============================================================
+   Interactive pointer effects (cursor glow · card spotlight · magnetic)
+   transform/opacity only · gated by reduced-motion & fine pointer
+   ============================================================ */
+(function () {
+  var fine = window.matchMedia("(pointer: fine)").matches;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!fine || reduce) return;
+
+  /* cursor-follow glow with easing */
+  var glow = document.createElement("div");
+  glow.className = "cursor-glow";
+  document.body.appendChild(glow);
+  var tx = window.innerWidth / 2, ty = window.innerHeight / 2, cx = tx, cy = ty, raf = 0;
+  function loop() {
+    cx += (tx - cx) * 0.16; cy += (ty - cy) * 0.16;
+    glow.style.transform = "translate(" + cx + "px," + cy + "px)";
+    if (Math.abs(tx - cx) > 0.4 || Math.abs(ty - cy) > 0.4) { raf = requestAnimationFrame(loop); }
+    else { raf = 0; }
+  }
+  window.addEventListener("pointermove", function (e) {
+    tx = e.clientX; ty = e.clientY;
+    if (!raf) raf = requestAnimationFrame(loop);
+  }, { passive: true });
+
+  /* card spotlight follows cursor inside the card */
+  document.querySelectorAll(".pcard, .cat").forEach(function (card) {
+    card.addEventListener("pointermove", function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+      card.style.setProperty("--spot", "0.16");
+    });
+    card.addEventListener("pointerleave", function () {
+      card.style.setProperty("--spot", "0");
+    });
+  });
+
+  /* magnetic primary buttons */
+  document.querySelectorAll(".btn--accent").forEach(function (btn) {
+    btn.addEventListener("pointermove", function (e) {
+      var r = btn.getBoundingClientRect();
+      var mx = e.clientX - r.left - r.width / 2;
+      var my = e.clientY - r.top - r.height / 2;
+      btn.style.transform = "translate(" + (mx * 0.25) + "px," + (my * 0.4) + "px)";
+    });
+    btn.addEventListener("pointerleave", function () { btn.style.transform = ""; });
+  });
+})();
