@@ -1,4 +1,5 @@
-// 유령제작소 — hero 3D orb (Three.js, Home only). Falls back to CSS ball on failure.
+// 유령제작소 — hero 3D (Home). Concept: an AI-generated layout grid (the rough 80%)
+// with ONE selected region raised + glowing + framed (the finished "마지막 20%").
 import * as THREE from "three";
 
 const el = document.getElementById("orb3d");
@@ -8,55 +9,85 @@ if (el) {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const scene = new THREE.Scene();
-    const cam = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
-    cam.position.z = 4.4;
+    const cam = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+    cam.position.set(0, 0, 7.2);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     el.appendChild(renderer.domElement);
-
     function resize() {
       const s = el.clientWidth || 420;
       renderer.setSize(s, s, false);
-      cam.aspect = 1;
-      cam.updateProjectionMatrix();
+      cam.aspect = 1; cam.updateProjectionMatrix();
     }
     resize();
 
-    // faceted low-poly gem
-    const geo = new THREE.IcosahedronGeometry(1.35, 1);
-    const mat = new THREE.MeshStandardMaterial({ color: 0x1a2a42, metalness: 0.25, roughness: 0.4, flatShading: true });
-    const mesh = new THREE.Mesh(geo, mat);
-    scene.add(mesh);
+    // lights (brand)
+    scene.add(new THREE.AmbientLight(0x2a3c55, 1.1));
+    const l1 = new THREE.PointLight(0xff7a4a, 2.4, 0, 0); l1.position.set(3.5, 3, 5); scene.add(l1);
+    const l2 = new THREE.PointLight(0x6aa0e0, 2.0, 0, 0); l2.position.set(-4, -1, 4); scene.add(l2);
+    const l3 = new THREE.DirectionalLight(0xffffff, 0.5); l3.position.set(0, 4, 2); scene.add(l3);
 
-    // wireframe shell
-    const wire = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.62, 1),
-      new THREE.MeshBasicMaterial({ color: 0x5b8fd0, wireframe: true, transparent: true, opacity: 0.16 })
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const COLS = 5, ROWS = 4, SP = 0.62, TILE = 0.5, TH = 0.12;
+    // the finished 2x2 region (exactly 20% of 20 tiles)
+    const DONE = new Set(["3,1", "4,1", "3,2", "4,2"]);
+
+    const tileGeo = new THREE.BoxGeometry(TILE, TILE, TH);
+    const matRough = new THREE.MeshStandardMaterial({ color: 0x16263d, roughness: 0.85, metalness: 0.1 });
+    const matDone = new THREE.MeshStandardMaterial({ color: 0x2a1712, roughness: 0.32, metalness: 0.35, emissive: 0xda6a4a, emissiveIntensity: 0.55 });
+
+    const doneTiles = [];
+    for (let c = 0; c < COLS; c++) {
+      for (let r = 0; r < ROWS; r++) {
+        const isDone = DONE.has(c + "," + r);
+        const m = new THREE.Mesh(tileGeo, isDone ? matDone : matRough);
+        m.position.set((c - (COLS - 1) / 2) * SP, (r - (ROWS - 1) / 2) * SP, isDone ? 0.26 : 0);
+        group.add(m);
+        if (isDone) doneTiles.push(m);
+      }
+    }
+
+    // selection frame around the finished region (= "여기만" / HCI selection)
+    const cMin = 3, cMax = 4, rMin = 1, rMax = 2, pad = TILE / 2 + 0.07;
+    const x0 = (cMin - (COLS - 1) / 2) * SP - pad, x1 = (cMax - (COLS - 1) / 2) * SP + pad;
+    const y0 = (rMin - (ROWS - 1) / 2) * SP - pad, y1 = (rMax - (ROWS - 1) / 2) * SP + pad;
+    const fz = 0.5;
+    const framePts = [
+      new THREE.Vector3(x0, y0, fz), new THREE.Vector3(x1, y0, fz),
+      new THREE.Vector3(x1, y1, fz), new THREE.Vector3(x0, y1, fz), new THREE.Vector3(x0, y0, fz),
+    ];
+    const frame = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints(framePts),
+      new THREE.LineBasicMaterial({ color: 0xff8a5a, transparent: true, opacity: 0.9 })
     );
-    scene.add(wire);
+    group.add(frame);
+    // corner handles
+    const handleGeo = new THREE.SphereGeometry(0.05, 12, 12);
+    const handleMat = new THREE.MeshBasicMaterial({ color: 0xff8a5a });
+    [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].forEach(([hx, hy]) => {
+      const h = new THREE.Mesh(handleGeo, handleMat);
+      h.position.set(hx, hy, fz); group.add(h);
+    });
 
-    // brand-colored lights
-    const l1 = new THREE.PointLight(0xff7a4a, 2.6, 0, 0); l1.position.set(3.2, 2.0, 4.0); scene.add(l1);
-    const l2 = new THREE.PointLight(0x6aa0e0, 2.3, 0, 0); l2.position.set(-4.0, -1.4, 2.2); scene.add(l2);
-    const l3 = new THREE.PointLight(0xffffff, 0.6, 0, 0); l3.position.set(0, 3, -3); scene.add(l3);
-    scene.add(new THREE.AmbientLight(0x2a3c55, 1.0));
-
-    // floating particles
-    const N = 130, pg = new THREE.BufferGeometry(), pos = new Float32Array(N * 3);
+    // floating particles for depth
+    const N = 70, pg = new THREE.BufferGeometry(), pos = new Float32Array(N * 3);
     for (let i = 0; i < N; i++) {
-      const r = 2.2 + Math.random() * 1.7, a = Math.random() * Math.PI * 2, b = Math.acos(2 * Math.random() - 1);
-      pos[i * 3] = r * Math.sin(b) * Math.cos(a);
-      pos[i * 3 + 1] = r * Math.sin(b) * Math.sin(a);
-      pos[i * 3 + 2] = r * Math.cos(b);
+      pos[i * 3] = (Math.random() - 0.5) * 8;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 7;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 4 + 1;
     }
     pg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-    const pts = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0x9fc0e8, size: 0.032, transparent: true, opacity: 0.7 }));
-    scene.add(pts);
+    scene.add(new THREE.Points(pg, new THREE.PointsMaterial({ color: 0x9fc0e8, size: 0.03, transparent: true, opacity: 0.55 })));
 
+    // base isometric-ish tilt
+    group.rotation.x = -0.62;
+    group.rotation.z = 0.12;
     if (ball) ball.style.display = "none";
 
-    // mouse interaction
+    // mouse parallax
     let tx = 0, ty = 0;
     el.addEventListener("pointermove", (e) => {
       const r = el.getBoundingClientRect();
@@ -66,15 +97,14 @@ if (el) {
 
     let t = 0;
     function loop() {
-      t += 0.005;
-      mesh.rotation.y += 0.005;
-      mesh.rotation.x += (ty * 0.7 - mesh.rotation.x) * 0.06;
-      mesh.rotation.z += (tx * 0.5 - mesh.rotation.z) * 0.06;
-      wire.rotation.x = mesh.rotation.x;
-      wire.rotation.y = -mesh.rotation.y;
-      wire.rotation.z = mesh.rotation.z;
-      pts.rotation.y += 0.001;
-      mesh.scale.setScalar(1 + Math.sin(t) * 0.04);
+      t += 0.016;
+      group.rotation.z += (0.12 + tx * 0.5 - group.rotation.z) * 0.05;
+      group.rotation.x += (-0.62 + ty * 0.4 - group.rotation.x) * 0.05;
+      group.position.y = Math.sin(t * 0.8) * 0.12;
+      const pulse = 0.26 + Math.sin(t * 1.6) * 0.06;
+      doneTiles.forEach((m) => (m.position.z = pulse));
+      frame.material.opacity = 0.7 + Math.sin(t * 1.6) * 0.25;
+      matDone.emissiveIntensity = 0.5 + Math.sin(t * 1.6) * 0.18;
       renderer.render(scene, cam);
       if (!reduce) requestAnimationFrame(loop);
     }
