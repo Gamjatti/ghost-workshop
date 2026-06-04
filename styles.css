@@ -596,7 +596,7 @@ body::before {
     rgba(255,255,255,0.03);
 }
 @media (prefers-reduced-motion: reduce) { .cursor-glow { display: none; } }
-@media (pointer: coarse) { .cursor-glow { display: none; } }
+@media (hover: none) and (pointer: coarse) { .cursor-glow { display: none; } }
 /* ===== cursor glow — brighter & tighter so it clearly follows ===== */
 .cursor-glow {
   width: 380px; height: 380px; margin: -190px 0 0 -190px;

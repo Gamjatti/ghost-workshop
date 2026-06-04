@@ -185,7 +185,7 @@ if (form && formMsg && submitBtn) {
    transform/opacity only · gated by reduced-motion & fine pointer
    ============================================================ */
 (function () {
-  var fine = window.matchMedia("(pointer: fine)").matches;
+  var fine = window.matchMedia("(any-pointer: fine)").matches;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!fine || reduce) return;
 
