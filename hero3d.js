@@ -28,21 +28,22 @@ if (el) {
     const pmrem = new THREE.PMREMGenerator(renderer);
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 
-    // glass material, tinted with brand terracotta inside
-    const geo = new THREE.TorusKnotGeometry(0.82, 0.3, 240, 36);
+    // tinted glass crystal — visible body + transmission + iridescence
+    const geo = new THREE.TorusKnotGeometry(0.8, 0.34, 220, 36);
     const mat = new THREE.MeshPhysicalMaterial({
-      transmission: 1, thickness: 1.6, roughness: 0.05, ior: 1.5, metalness: 0,
-      clearcoat: 1, clearcoatRoughness: 0.12, transparent: true,
-      color: 0xdfeaf7, attenuationColor: 0xda6a4a, attenuationDistance: 1.1,
-      iridescence: 0.5, iridescenceIOR: 1.3,
+      transmission: 0.55, thickness: 2.2, roughness: 0.12, ior: 1.45, metalness: 0,
+      clearcoat: 1, clearcoatRoughness: 0.06, transparent: true,
+      color: 0x33538a, attenuationColor: 0xda6a4a, attenuationDistance: 0.7,
+      iridescence: 1, iridescenceIOR: 1.35, iridescenceThicknessRange: [120, 420],
+      envMapIntensity: 1.6,
     });
     const knot = new THREE.Mesh(geo, mat);
     scene.add(knot);
 
     // brand-colored rim lights for glints
-    const l1 = new THREE.PointLight(0xff7a4a, 18, 0, 2); l1.position.set(3, 2, 3); scene.add(l1);
-    const l2 = new THREE.PointLight(0x6aa0e0, 16, 0, 2); l2.position.set(-3, -1.5, 2.5); scene.add(l2);
-    const l3 = new THREE.DirectionalLight(0xffffff, 0.7); l3.position.set(0, 3, 4); scene.add(l3);
+    const l1 = new THREE.PointLight(0xff7a4a, 26, 0, 2); l1.position.set(3, 2, 3); scene.add(l1);
+    const l2 = new THREE.PointLight(0x6aa0e0, 22, 0, 2); l2.position.set(-3, -1.5, 2.5); scene.add(l2);
+    const l3 = new THREE.DirectionalLight(0xffffff, 0.9); l3.position.set(0, 3, 4); scene.add(l3);
 
     if (ball) ball.style.display = "none";
 
