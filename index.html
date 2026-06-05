@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }</script>
   <title>유령제작소 | AI 디자인의 마지막 20%</title>
   <meta name="description" content="AI는 초안을 만듭니다. 실무 결과물은 마지막 20%에서 결정됩니다. 유령제작소는 생성 이후의 수정·판단·감각·의도 전달 문제를 연구합니다." />
   <meta property="og:title" content="유령제작소 | AI 디자인의 마지막 20%" />
@@ -50,8 +49,13 @@
             <a href="blog.html" class="btn btn--ghost">Blog 읽기</a>
           </div>
         </div>
-        <div class="orb3d" id="orb3d" aria-hidden="true">
-          <span class="orb3d__ball"></span>
+        <div class="ratio" aria-hidden="true">
+          <div class="ratio__cap"><span>AI 생성</span><b>사람이 결정하는 구간</b></div>
+          <div class="ratio__track">
+            <div class="ratio__done"><span>빠르게 만들어지는 80%</span></div>
+            <div class="ratio__last"><span>마지막 20%</span></div>
+          </div>
+          <p class="ratio__note">초안은 빠릅니다. 결과물의 완성도는 오른쪽 끝에서 갈립니다.</p>
         </div>
       </div>
     </section>
@@ -197,6 +201,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script type="module" src="hero3d.js"></script>
 </body>
 </html>
