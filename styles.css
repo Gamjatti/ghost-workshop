@@ -674,3 +674,40 @@ body::before {
 }
 @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
 @media (prefers-reduced-motion: reduce) { .orb3d::before, .orb3d__ball { animation: none; } }
+/* ============================================================
+   OFFERS — staggered gradient cards with arrow (enterprise layout)
+   ============================================================ */
+.offers { display: flex; flex-direction: column; gap: 24px; }
+.offer {
+  position: relative; width: 64%; min-height: 230px; border-radius: 22px; padding: 30px 32px; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 60px;
+  border: 1px solid rgba(255,255,255,0.10); color: var(--text);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.offer:nth-child(even) { align-self: flex-end; }
+.offer:nth-child(2) { width: 60%; }
+.offer:hover { transform: translateY(-6px); box-shadow: 0 30px 70px rgba(2,8,18,0.55); }
+/* gradient field + decorative swirl */
+.offer::after {
+  content: ""; position: absolute; right: -10%; top: -30%; width: 70%; height: 160%; border-radius: 50%;
+  filter: blur(20px); opacity: 0.5; pointer-events: none;
+}
+.offer--20 { background: linear-gradient(145deg, rgba(218,106,74,0.30), rgba(11,26,44,0.7)); }
+.offer--20::after { background: radial-gradient(circle, rgba(218,106,74,0.55), transparent 60%); }
+.offer--fix { background: linear-gradient(145deg, rgba(91,143,208,0.30), rgba(11,26,44,0.7)); }
+.offer--fix::after { background: radial-gradient(circle, rgba(91,143,208,0.55), transparent 60%); }
+.offer--note { background: linear-gradient(145deg, rgba(143,183,224,0.26), rgba(11,26,44,0.7)); }
+.offer--note::after { background: radial-gradient(circle, rgba(143,183,224,0.5), transparent 60%); }
+.offer > * { position: relative; z-index: 1; }
+.offer__arrow {
+  width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.35);
+  display: grid; place-items: center; font-size: 18px; color: var(--text);
+  transition: transform 0.35s var(--ease), background 0.3s, color 0.3s, border-color 0.3s;
+}
+.offer:hover .offer__arrow { background: #fff; color: #0b1a2c; border-color: #fff; transform: translate(5px,-5px); }
+.offer .cat__name { font-family: var(--display); font-size: clamp(23px, 2.7vw, 32px); font-weight: 700; letter-spacing: -0.025em; }
+.offer .cat__desc { color: rgba(234,241,250,0.78); font-size: 15px; margin-top: 10px; max-width: 42ch; }
+
+@media (max-width: 720px) {
+  .offer, .offer:nth-child(2) { width: 100%; align-self: stretch; min-height: 180px; gap: 36px; }
+}
